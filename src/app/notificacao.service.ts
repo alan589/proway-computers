@@ -1,0 +1,14 @@
+import { Injectable } from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class NotificacaoService {
+
+  constructor(private snackBar: MatSnackBar) { }
+  notificar(msg: string){
+    this.snackBar.open(msg, "Ok", {duration: 3500, 
+      verticalPosition: "bottom", horizontalPosition: "center"});
+  }
+}
