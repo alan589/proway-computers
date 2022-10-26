@@ -7,13 +7,11 @@ import { IProdutoCarrinho } from './produtos';
 
 export class CarrinhoService {
   itens: IProdutoCarrinho [] = [];
-  constructor() {
-	const produtos = JSON.parse(localStorage.getItem("carrinho") || "");
-	if(produtos) this.itens = produtos;
-	
+  constructor() {	
   }
   obtemCarrinho(){
-	return JSON.parse(localStorage.getItem("carrinho") || "");
+    this.itens = JSON.parse(localStorage.getItem("carrinho") || "");
+    return this.itens;
   }
   adicionarCarrinho(produto: IProdutoCarrinho){
 	this.itens.push(produto);
@@ -23,5 +21,10 @@ export class CarrinhoService {
   limparCarrinho(){
 	this.itens = [];
 	localStorage.clear();
+  }
+
+  removerProdutoCarrinho(produtoId: number){
+    this.itens = this.itens.filter(item => item.id !== produtoId);
+    localStorage.setItem("carrinho", JSON.stringify(this.itens));
   }
 }
