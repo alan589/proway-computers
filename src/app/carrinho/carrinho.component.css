@@ -43,7 +43,7 @@ img {
 }
 
 input {
-    width: 30px;
+    width: 45px;
     text-align: center;
 }
 
@@ -59,4 +59,8 @@ input {
 
 .buy-button:hover {
     filter: brightness(0.9);
+}
+
+.centralizar {
+	text-align: center;
 }

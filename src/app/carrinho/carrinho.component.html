@@ -1,17 +1,20 @@
 <h2 class="card-title">Carrinho</h2>
-<div>
+<div *ngIf="itensDoCarrinho.length > 0; else semProduto">
     <ul *ngFor="let item of itensDoCarrinho">
         <li>
             <img [src]="item.imagem" alt="">
             <p>{{item.descricao}}</p>
-            <p>Preço: {{item.preco}}</p>
+            <p>Preço: {{item.preco | currency: "BRL"}}</p>
             <label> 
                 Quantidade:
-                <input type="number" [(ngModel)]="item.quantidadeSelecionada">
+                <input type="number" min="1" [(ngModel)]="item.quantidadeSelecionada" (change)="calcularTotal()" (change)="this.carrinhoService.salvarCarrinhoLocalStorage(itensDoCarrinho);">
             </label>
-            <button class="remove-button" (click)="carrinhoService.removerProdutoCarrinho(item.id)"><i class="fa-solid fa-xmark"></i></button>
+            <button class="remove-button" (click)="removerProdutoCarrinho(item.id)"><i class="fa-solid fa-xmark"></i></button>
         </li>
     </ul>
-    <h2 class="cart-total">Total: R$10000</h2>
-    <button class="buy-button">Comprar</button>
+    <h2 class="cart-total">Total: {{total | currency: "BRL"}}</h2>
+    <button class="buy-button" (click)="comprar()">Comprar</button>
 </div>
+
+
+<ng-template #semProduto><h2 class="centralizar">Nenhum produto foi adicionado ao carrinho</h2></ng-template>

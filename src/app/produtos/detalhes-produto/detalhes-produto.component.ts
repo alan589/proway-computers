@@ -32,8 +32,6 @@ export class DetalhesProdutoComponent implements OnInit {
 		quantidadeSelecionada: this.quantidade
 	}
 	this.carrinhoService.adicionarCarrinho(produto);
-	
-
   }
 
 }
